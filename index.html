@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17 Years of Excellence</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 100%; height: 100%; }
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0b1020;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(113, 76, 255, .18), transparent 32%),
+      radial-gradient(circle at 80% 70%, rgba(0, 210, 190, .12), transparent 32%),
+      linear-gradient(135deg, #080c18, #11182d 55%, #0b1020);
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: .45;
+    pointer-events: none;
+  }
+  .orb.one { width: 260px; height: 260px; top: -100px; left: -80px; background: #7657ff; }
+  .orb.two { width: 220px; height: 220px; right: -80px; bottom: -60px; background: #00bfae; }
+
+  .card {
+    width: min(900px, 92vw);
+    min-height: min(690px, 88vh);
+    padding: 52px 42px;
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 30px;
+    background: rgba(255,255,255,.065);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 30px 90px rgba(0,0,0,.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .screen {
+    display: none;
+    width: 100%;
+    animation: enter .75s ease both;
+  }
+  .screen.active { display: block; }
+
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(18px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .25em;
+    font-size: 12px;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 22px;
+  }
+
+  .huge {
+    font-size: clamp(110px, 23vw, 230px);
+    line-height: .75;
+    font-weight: 800;
+    letter-spacing: -.08em;
+    margin: 0;
+    background: linear-gradient(120deg, #fff 15%, #c9c0ff 55%, #78e5d8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .anniversary-name {
+    font-size: clamp(48px, 9vw, 88px);
+    line-height: .9;
+    font-weight: 800;
+    letter-spacing: -.06em;
+    margin: 2px 0 26px;
+    background:
+      linear-gradient(
+        110deg,
+        #fff 0%,
+        #c9c0ff 28%,
+        #fff 42%,
+        #78e5d8 58%,
+        #fff 72%,
+        #c9c0ff 100%
+      );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 18px rgba(255,255,255,.18);
+    animation: nameGlitter 3s ease-in-out infinite;
+  }
+
+  @keyframes nameGlitter {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  h1 {
+    font-size: clamp(38px, 7vw, 76px);
+    line-height: 1;
+    margin: 0 0 18px;
+    letter-spacing: -.045em;
+  }
+
+  h2 {
+    font-size: clamp(28px, 5vw, 50px);
+    margin: 0 0 18px;
+    letter-spacing: -.035em;
+  }
+
+  p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: rgba(255,255,255,.72);
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.7;
+  }
+
+  .sub {
+    margin-top: 16px;
+    font-size: 14px;
+    color: rgba(255,255,255,.48);
+  }
+
+  button {
+    margin-top: 34px;
+    border: 0;
+    border-radius: 999px;
+    padding: 15px 27px;
+    color: #0a1020;
+    background: #fff;
+    font-size: 15px;
+    font-weight: 750;
+    cursor: pointer;
+    box-shadow: 0 12px 35px rgba(0,0,0,.28);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 17px 42px rgba(0,0,0,.36);
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 8px 13px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 999px;
+    color: rgba(255,255,255,.65);
+    font-size: 12px;
+    margin: 5px;
+  }
+
+  .timeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 38px auto 0;
+    max-width: 720px;
+  }
+  .line {
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.28));
+  }
+  .line:last-child { background: linear-gradient(90deg, rgba(255,255,255,.28), transparent); }
+  .dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 22px rgba(255,255,255,.55);
+    flex: 0 0 auto;
+  }
+
+  .message {
+    margin: 28px auto 0;
+    padding: 24px 28px;
+    border-left: 2px solid rgba(255,255,255,.6);
+    background: rgba(255,255,255,.045);
+    text-align: left;
+    border-radius: 0 16px 16px 0;
+    max-width: 700px;
+  }
+  .message p { font-size: 17px; }
+
+  .signature {
+    margin-top: 28px;
+    font-weight: 700;
+    color: rgba(255,255,255,.9);
+  }
+
+  .highlight-name {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(118,87,255,.28), rgba(0,191,174,.22));
+    border: 1px solid rgba(255,255,255,.22);
+    color: #fff;
+    font-weight: 800;
+    text-shadow: 0 0 18px rgba(255,255,255,.18);
+    box-shadow: 0 8px 28px rgba(0,0,0,.18), inset 0 0 18px rgba(255,255,255,.05);
+  }
+
+  .tiny {
+    margin-top: 12px;
+    color: rgba(255,255,255,.45);
+    font-size: 12px;
+  }
+
+  #confetti {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .progress {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 4;
+  }
+  .bar {
+    width: 22px;
+    height: 3px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.18);
+    transition: background .3s ease, width .3s ease;
+  }
+  .bar.active { background: rgba(255,255,255,.9); width: 34px; }
+
+  @media (max-width: 600px) {
+    .card { padding: 38px 22px; min-height: 78vh; border-radius: 24px; }
+    .message { padding: 20px; }
+    .message p { font-size: 15px; }
+    .timeline { margin-top: 28px; }
+  }
+</style>
+</head>
+
+<body>
+<div class="page">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+  <div class="card">
+
+    <section class="screen active" data-step="0">
+      <div class="eyebrow">A small celebration for</div>
+      <div class="huge">17</div>
+      <h1>Years.</h1>
+      <div class="anniversary-name">Nikhil Agrawal</div>
+      <p>Some milestones deserve more than a simple “Congratulations.”</p>
+      <button onclick="next()">Click to celebrate →</button>
+    </section>
+
+    <section class="screen" data-step="1">
+      <div class="eyebrow">17 years means</div>
+      <h2>Countless Mondays.</h2>
+      <p>Countless challenges. Countless lessons. Countless moments that helped shape a remarkable professional journey.</p>
+      <div class="timeline"><span class="dot"></span><span class="line"></span><span class="dot"></span><span class="line"></span><span class="dot"></span></div>
+      <button onclick="next()">Keep going →</button>
+    </section>
+
+    <section class="screen" data-step="2">
+      <div class="eyebrow">But numbers don't tell the whole story</div>
+      <h2>It’s the impact that matters.</h2>
+      <p>Over the years, the real milestones are the people you have guided, the knowledge you have shared, and the difference you have made along the way.</p>
+      <div style="margin-top:24px">
+        <span class="pill">Leadership</span>
+        <span class="pill">Experience</span>
+        <span class="pill">Growth</span>
+        <span class="pill">Impact</span>
+      </div>
+      <button onclick="next()">One more →</button>
+    </section>
+
+    <section class="screen" data-step="3">
+      <div class="eyebrow">And now...</div>
+      <div class="huge" style="font-size:clamp(95px,18vw,190px)">17</div>
+      <h2>Congratulations!</h2>
+      <p>On completing 17 incredible years with the organisation.</p>
+      <button onclick="next()">Open your message →</button>
+    </section>
+
+    <section class="screen" data-step="4">
+      <div class="eyebrow">A message from Vivek</div>
+      <h2>Happy 17th Work Anniversary, <span class="highlight-name">Nikhil!</span></h2>
+      <div class="message">
+        <p>
+          17 years is not just a milestone — it represents years of dedication,
+          experience, learning, leadership and the impact you have created around you.
+        </p>
+        <p style="margin-top:16px">
+          I feel fortunate to have the opportunity to work with you and learn from
+          your experience. Thank you for the guidance, support and lessons along the way.
+        </p>
+        <p style="margin-top:16px">
+          Wishing you many more successful milestones, new achievements and an
+          equally incredible journey ahead.
+        </p>
+      </div>
+      <div class="signature">— Best wishes, Vivek</div>
+      <button onclick="celebrate()">Celebrate 17 Years 🎉</button>
+      <div class="tiny">P.S. 17 years definitely deserves a little celebration.</div>
+    </section>
+
+    <section class="screen" data-step="5">
+      <div class="eyebrow">Here's to the next chapter, <span class="highlight-name">Nikhil</span></div>
+      <div class="huge" style="font-size:clamp(90px,17vw,180px)">17+</div>
+      <h2><span class="highlight-name">Nikhil</span>, the journey continues.</h2>
+      <p>More milestones. More achievements. More people inspired.</p>
+      <div class="signature">Congratulations once again! 🎉</div>
+      <button onclick="restart()">Replay ↻</button>
+    </section>
+
+  </div>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<div class="progress" id="progress">
+  <span class="bar active"></span><span class="bar"></span><span class="bar"></span>
+  <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+</div>
+
+<script>
+let current = 0;
+const screens = [...document.querySelectorAll('.screen')];
+const bars = [...document.querySelectorAll('.bar')];
+
+function show(index) {
+  screens[current].classList.remove('active');
+  current = index;
+  screens[current].classList.add('active');
+  bars.forEach((b, i) => b.classList.toggle('active', i === current));
+}
+
+function next() {
+  if (current < screens.length - 1) show(current + 1);
+}
+
+function restart() {
+  show(0);
+}
+
+function celebrate() {
+  next();
+  launchConfetti();
+}
+
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+let pieces = [];
+let animation;
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function launchConfetti() {
+  pieces = [];
+  for (let i = 0; i < 180; i++) {
+    pieces.push({
+      x: window.innerWidth / 2,
+      y: window.innerHeight * .32,
+      vx: (Math.random() - .5) * 13,
+      vy: Math.random() * -11 - 3,
+      g: .25 + Math.random() * .12,
+      size: 5 + Math.random() * 7,
+      rot: Math.random() * Math.PI,
+      vr: (Math.random() - .5) * .25,
+      life: 0
+    });
+  }
+  cancelAnimationFrame(animation);
+  animateConfetti();
+}
+
+function animateConfetti() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  let alive = false;
+
+  pieces.forEach(p => {
+    p.life++;
+    p.vy += p.g;
+    p.x += p.vx;
+    p.y += p.vy;
+    p.rot += p.vr;
+
+    if (p.life < 180 && p.y < canvas.height + 30) alive = true;
+
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.globalAlpha = Math.max(0, 1 - p.life / 190);
+    ctx.fillStyle = ["#ffffff","#c9c0ff","#78e5d8","#ffd166","#ff8fab"][p.life % 5];
+    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * .65);
+    ctx.restore();
+  });
+
+  if (alive) animation = requestAnimationFrame(animateConfetti);
+  else ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+</script>
+</body>
+</html>
